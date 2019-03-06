@@ -185,7 +185,6 @@ cantata `#A beautiful mpd control` \
 caddy `#A quick webserver that can be used to share a directory with others in <10 seconds` \
 cockpit `#A An awesome local and remote management tool` \
 cockpit-bridge \
-flowblade `#An advanced Movie Editor using the MLT framework` \
 fortune-mod `#Inspiring Quotes` \
 hexchat `#Irc Client` \
 libguestfs-tools `#Resize Vm Images and convert them` \
