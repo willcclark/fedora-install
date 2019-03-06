@@ -34,5 +34,5 @@ sudo dnf install -y wget && wget "https://git.furworks.de/tobias/fedora-install/
 
 ``` bash
 #installs wget, gets the script, makes it executable and runs it with steam and nonfree repos added for things like nvidia drivers
-sudo dnf install -y wget && rm install.sh && wget "https://git.furworks.de/tobias/fedora-install/raw/branch/master/install.sh" -O install.sh && chmod +x ./install.sh && ./install.sh --nonfree --steam
+sudo dnf install -y wget && wget "https://git.furworks.de/tobias/fedora-install/raw/branch/master/install.sh" -O ./install.sh && chmod +x ./install.sh && ./install.sh --nonfree --steam
 ```
