@@ -300,7 +300,7 @@ gsettings set org.gnome.nautilus.list-view use-tree-view true
 # Flatpak is the better option here
 if [ ! -z "$STEAMFLAT" ]; then
 	sudo dnf install -y flatpak
-	sudo flatpak -y remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+	sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 	flatpak -y install flathub com.valvesoftware.Steam
 	# Installed but not displayed? Check with: flatpak run com.valvesoftware.Steam
 fi
@@ -311,8 +311,8 @@ fi
 # Reenabling them just to make sure.
 ###
 
-sudo sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/fedora-updates-modular.repo
-sudo sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/fedora-modular.repo
+sudo sed -i '0,/enabled=0/s/enabled=0/enabled=1/g' /etc/yum.repos.d/fedora-updates-modular.repo
+sudo sed -i '0,/enabled=0/s/enabled=0/enabled=1/g' /etc/yum.repos.d/fedora-modular.repo
 
 #The user needs to reboot to apply all changes.
 echo "Please Reboot" && exit 0
