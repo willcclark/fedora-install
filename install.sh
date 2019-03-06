@@ -203,7 +203,8 @@ sudo dnf remove \
 -y \
 gnome-shell-extension-background-logo `#Tasteful but nah` \
 totem `#With mpv installed totem became a little useless` \
-chromium `#Using Chromium resets chromium-vaapi so remove it if installed, userprofiles will be kept and can be used in -vaapi`
+chromium `#Using Chromium resets chromium-vaapi so remove it if installed, userprofiles will be kept and can be used in -vaapi` \
+flowblade `#Sadly has really outdated mlt dependencies`
 
 
 ###
