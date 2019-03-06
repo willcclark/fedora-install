@@ -50,7 +50,7 @@ fi
 ###
 # Disable the Modular Repos
 # So far they are pretty empty, and sadly can muck with --best updates
-# Likely reenabling them in a future update
+# Reenabling them at the end for future use
 ###
 
 sudo sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/fedora-updates-modular.repo
@@ -63,6 +63,7 @@ sudo sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/fedora-modular.repo
 
 sudo dnf upgrade --best --allowerasing --refresh -y
 # And also remove any packages without a source backing them
+# If you come from the Fedora 30 Future i'll check if this is still optimal before F30 comes out.
 sudo dnf distro-sync -y
 
 ###
@@ -75,11 +76,11 @@ arc-theme `#A more comfortable GTK/Gnome-Shell Theme` \
 blender `#3D Software Powerhouse` \
 breeze-cursor-theme `#A more comfortable Cursor Theme from KDE` \
 calibre `#Ebook management` \
-chrome-gnome-shell `#Gnome <> Browser Integration for the plugins website` \
+chrome-gnome-shell `#Gnome <> Browser Integration for the gnome plugins website` \
 chromium-vaapi `#Comes with hardware acceleration and all Codecs` \
-darktable `#East RAW Editor` \
+darktable `#Easy RAW Editor` \
 evolution-spamassassin `#Helps you deal with spam in Evolution` \
-exfat-utils `#Allows managing exfat` \
+exfat-utils `#Allows managing exfat (android sd cards and co)` \
 ffmpeg `#Adds Codec Support to Firefox, and in general` \
 file-roller-nautilus `#More Archives supported in nautilus` \
 filezilla `#S/FTP Access` \
@@ -120,7 +121,7 @@ htop `#Cli process monitor` \
 inkscape  `#Working with .svg files` \
 kdenlive  `#Advanced Video Editor` \
 keepassxc  `#Password Manager` \
-krita  `#Painting done right` \
+krita  `#Painting done right keep in mind mypaint and gimp cant work together in current upstream versions - yet` \
 libreoffice-gallery-vrt-network-equipment `#Network Icon Preset for LibreOffice` \
 lm_sensors `#Show your systems Temparature` \
 'mozilla-fira-*' `#A nice font family` \
@@ -162,7 +163,7 @@ sudo dnf install \
 ansible `#Awesome to manage multiple machines or define states for systems` \
 adobe-source-code-pro-fonts `#The most beautiful monospace font around` \
 borgbackup `#If you need backups, this is your tool for it` \
-gitg `#+a gui for it, a little slow on larger repos sadly` \
+gitg `#a gui for git, a little slow on larger repos sadly` \
 iotop  `#disk usage cli monitor` \
 meld `#Quick Diff Tool` \
 nano `#Because pressing i is too hard sometimes` \
@@ -203,7 +204,7 @@ sudo dnf remove \
 -y \
 gnome-shell-extension-background-logo `#Tasteful but nah` \
 totem `#With mpv installed totem became a little useless` \
-chromium `#Using Chromium resets chromium-vaapi`
+chromium `#Using Chromium resets chromium-vaapi so remove it if installed, userprofiles will be kept and can be used in -vaapi`
 
 
 ###
@@ -230,24 +231,33 @@ sudo tuned-adm profile balanced
 # Virtual Machines
 sudo systemctl enable --now libvirtd
 
-# Management of local/remote system(s)
+# Management of local/remote system(s) - available via http://localhost:9090
 sudo systemctl enable --now cockpit.socket
 
 ###
 # Theming and GNOME Options
 ###
 
+
+# Tilix Dark Theme
 gsettings set com.gexperts.Tilix.Settings theme-variant 'dark'
 
+#Gnome Shell Theming
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Snow'
 gsettings set org.gnome.desktop.interface icon-theme 'Pop'
 gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark-solid'
+
+#Set SCP as Monospace (Code) Font
 gsettings set org.gnome.desktop.interface monospace-font-name 'Source Code Pro Semi-Bold 12'
 
+#Set Extensions for gnome
 gsettings set org.gnome.shell enabled-extensions "['user-theme@gnome-shell-extensions.gcampax.github.com', 'TopIcons@phocean.net', 'dash-to-dock@micxgx.gmail.com']"
 
+#Better Font Smoothing
 gsettings set org.gnome.settings-daemon.plugins.xsettings antialiasing 'rgba'
+
+#Usability Improvements
 gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'adaptive'
 gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
 gsettings set org.gnome.desktop.calendar show-weekdate true
@@ -255,7 +265,7 @@ gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.shell.overrides workspaces-only-on-primary false
 
-
+#Dash to Dock Theme
 gsettings set org.gnome.shell.extensions.dash-to-dock apply-custom-theme false
 gsettings set org.gnome.shell.extensions.dash-to-dock custom-background-color false
 gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-customize-running-dots true
@@ -273,12 +283,12 @@ gsettings set org.gnome.shell.extensions.dash-to-dock transparency-mode 'FIXED'
 gsettings set org.gnome.shell.extensions.dash-to-dock running-indicator-style 'SEGMENTED'
 gsettings set org.gnome.shell.extensions.dash-to-dock background-opacity 0.70000000000000000
 
+#This indexer is nice, but can be detrimental for laptop users battery life
 gsettings set org.freedesktop.Tracker.Miner.Files index-on-battery false
 gsettings set org.freedesktop.Tracker.Miner.Files index-on-battery-first-time false
 gsettings set org.freedesktop.Tracker.Miner.Files throttle 15
 
-gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
-
+#Nautilus (File Manager) Usability
 gsettings set org.gnome.nautilus.icon-view default-zoom-level 'standard'
 gsettings set org.gnome.nautilus.preferences executable-text-activation 'ask'
 gsettings set org.gtk.Settings.FileChooser sort-directories-first true
@@ -286,6 +296,8 @@ gsettings set org.gnome.nautilus.list-view use-tree-view true
 
 
 
+# Steam games (32bit) have issues with the too new 32bit compat libs in fedora
+# Flatpak is the better option here
 if [ ! -z "$STEAMFLAT" ]; then
 	sudo dnf install -y flatpak
 	sudo flatpak -y remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -294,4 +306,13 @@ if [ ! -z "$STEAMFLAT" ]; then
 fi
 
 
+###
+# These will be more used in the future by some maintainers
+# Reenabling them just to make sure.
+###
+
+sudo sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/fedora-updates-modular.repo
+sudo sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/fedora-modular.repo
+
+#The user needs to reboot to apply all changes.
 echo "Please Reboot" && exit 0
