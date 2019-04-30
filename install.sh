@@ -63,7 +63,7 @@ sudo sed -i 's/enabled=1/enabled=0/g' /etc/yum.repos.d/fedora-modular.repo
 
 sudo dnf upgrade --best --allowerasing --refresh -y
 # And also remove any packages without a source backing them
-# If you come from the Fedora 30 Future i'll check if this is still optimal before F30 comes out.
+# If you come from the Fedora 31 Future i'll check if this is still optimal before F31 comes out.
 sudo dnf distro-sync -y
 
 ###
@@ -135,7 +135,7 @@ openshot `#Simple Video Editor` \
 openssh-askpass `#Base Lib to let applications request ssh pass via gui` \
 p7zip `#Archives` \
 p7zip-plugins `#Even more of them` \
-pop-icon-theme `#The Icon theme from system76, which is quite nice` \
+papirus-icon-theme `#A quite nice icon theme` \
 pv `#pipe viewer - see what happens between the | with output | pv | receiver ` \
 python3-devel `#Python Development Gear` \
 python3-neovim `#Python Neovim Libs` \
@@ -151,15 +151,7 @@ vagrant `#Virtual Machine management and autodeployment` \
 vagrant-libvirt `#integration with libvirt` \
 virt-manager `#A gui to manage virtual machines` \
 wavemon `#a cli wifi status tool` \
-youtube-dl `#Allows you to download and save youtube videos but also to open their links by dragging them into mpv!`
-
-
-###
-# Developer Niceties
-###
-
-sudo dnf install \
--y \
+youtube-dl `#Allows you to download and save youtube videos but also to open their links by dragging them into mpv!` \
 ansible `#Awesome to manage multiple machines or define states for systems` \
 adobe-source-code-pro-fonts `#The most beautiful monospace font around` \
 borgbackup `#If you need backups, this is your tool for it` \
@@ -173,14 +165,7 @@ nload `#Network Load Monitor` \
 tig `#cli git tool` \
 vim-enhanced `#full vim` \
 zsh `#Best shell` \
-zsh-syntax-highlighting `#Now with syntax highlighting`
-
-
-###
-# These are more targeted to developers/advanced Users/specific usecases, you might want them - or not.
-###
-sudo dnf install \
--y \
+zsh-syntax-highlighting `#Now with syntax highlighting` \
 cantata `#A beautiful mpd control` \
 caddy `#A quick webserver that can be used to share a directory with others in <10 seconds` \
 cockpit `#A An awesome local and remote management tool` \
@@ -245,7 +230,7 @@ gsettings set com.gexperts.Tilix.Settings theme-variant 'dark'
 #Gnome Shell Theming
 gsettings set org.gnome.desktop.interface gtk-theme 'Arc-Dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'Breeze_Snow'
-gsettings set org.gnome.desktop.interface icon-theme 'Pop'
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 gsettings set org.gnome.shell.extensions.user-theme name 'Arc-Dark-solid'
 
 #Set SCP as Monospace (Code) Font
