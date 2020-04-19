@@ -2,20 +2,44 @@
 
 A basic get-up-and-running Fedora install script.
 
-This was purposefully re-worked from my best-effort own setup script as a help and base for interested users taking part in the fedora os challenge but will be kept updated after as well.
-
-
 It supposed to give you an easy starting point, with quite a few good tools and a better looking/usable theme, or simple things like reenabling the maximize/minimize buttons for gnome.
 
 These are of course by nature my opinions for how to go about it, to save newcomers twenty pages of clicking in guis that you'd have to do to achieve the same.
+
 
 If you have Improvements or Issues, contact me!:
 
 https://t.me/wolfshappen
 
 
+## Things YOU have to do after:
+Read the script! Seriously!
 
-(So no, this is not "a random script". :P)
+There are additions, like if you have an AMD gpu and want to use the much better mesa-aco to render things you need to run steamlike this in a terminal/override then flatpak env:
+
+``` bash
+FLATPAK_GL_DRIVERS=mesa-aco flatpak run com.valvesoftware.Steam
+```
+
+Or making it permanent for amd so you only need to click the icon:
+``` bash
+flatpak override --env=FLATPAK_GL_DRIVERS=mesa-aco --user
+```
+
+Same goes for allowing access to external harddrives/controllers for it
+``` bash
+# Allow talking to controllers
+flatpak override --user --device=all com.valvesoftware.Steam
+# Allow access to /put-your-own-path-here
+flatpak override --filesystem=/put-your-own-path-here com.valvesoftware.Steam
+```
+
+Or setting a powersave profile for tuned:
+``` bash
+sudo tuned-adm profile powersave
+```
+
+Linux is a journey, this is only the beginning. There's always more to learn if you want to!
 
 
 ## RUN THIS AS YOUR USER!
